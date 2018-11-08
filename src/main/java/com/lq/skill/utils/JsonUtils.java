@@ -3,7 +3,8 @@ package com.lq.skill.utils;
 /**
  * @Auther: LQ
  * @Date: 2018/11/7 22:49
- * @Description:
+ * @Description:字符串转对象，对象转字符串的工具类 因为StringRedisTemplate的opsForValue()方法需要key, value都需要String类型，所以当value值存入对象的时候
+ * 先转成字符串后存入。 转换失败异常抛给调用方处理
  */
 
 import java.io.IOException;
@@ -11,11 +12,6 @@ import java.io.IOException;
 import org.springframework.util.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- * 字符串转对象，对象转字符串的工具类
- * 因为StringRedisTemplate的opsForValue()方法需要key,value都需要String类型，所以当value值存入对象的时候
- * 先转成字符串后存入。 转换失败异常抛给调用方处理
- */
 public class JsonUtils {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();

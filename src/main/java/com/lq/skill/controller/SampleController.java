@@ -2,10 +2,12 @@ package com.lq.skill.controller;
 
 import com.lq.skill.entity.User;
 import com.lq.skill.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/test")
+@Slf4j
 public class SampleController {
 
     @Autowired
@@ -27,6 +30,7 @@ public class SampleController {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
     /**
      * 测试前后端连通性
      *
@@ -39,6 +43,18 @@ public class SampleController {
         return "hello";
     }
 
+    /**
+     * 简单登录
+     * @param user
+     * @return
+     */
+    @PostMapping("/doLogin")
+    @ResponseBody
+    public String login(User user) {
+        log.info(user + "");
+        user = userService.login(user);
+        return user != null ? "success!" : "error!";
+    }
 
     /**
      * 测试数据库 和redis
@@ -50,7 +66,7 @@ public class SampleController {
     public String getUserById() {
         stringRedisTemplate.opsForValue().set("key", "v", 1, TimeUnit.HOURS);
         String value = stringRedisTemplate.opsForValue().get("key");
-        return userService.getUserById(1).getName() + "redis:" + value;
+        return userService.getUserById(1) + "redis:" + value;
     }
 
     /**
@@ -63,4 +79,6 @@ public class SampleController {
     public String tX() {
         return userService.tx();
     }
+
+
 }

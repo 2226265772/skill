@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 /**
  * @Auther: LQ
  * @Date: 2018/11/6 23:03
- * @Description:
+ * @Description:交互数据库
  */
 @Repository
 @Mapper
@@ -21,4 +21,7 @@ public interface UserDao {
 
     @Insert("insert into user(id,name) values(#{id},#{name})")
     int insert(User user);
+
+    @Select("select * from user where username=#{username} and password=#{password}")
+    User login(User user);
 }
