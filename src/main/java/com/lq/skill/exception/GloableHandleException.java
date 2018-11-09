@@ -1,6 +1,7 @@
-package com.lq.skill.utils;
+package com.lq.skill.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,16 +14,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 @ResponseBody
 @Slf4j
-public class HandleException {
+public class GloableHandleException {
 
     @ExceptionHandler(value = {Exception.class})
     public String handle(Exception e) {
         System.out.println(" enter  handler  exception ");
         log.error(" enter  handler  exception {} ", e);
+
+        //返回格式等 待优化
         if (e instanceof SkillException) {
             return e.getMessage() + "  -错误码-" + ((SkillException) e).getCode();
+        } else if (e instanceof BindException) {
+            return ((BindException) e).getFieldErrors() + "格式错误  -错误码-" + "10002";
+        } else {
+            return "服务器未知异常";
         }
-        return e.getMessage();
     }
 }
 

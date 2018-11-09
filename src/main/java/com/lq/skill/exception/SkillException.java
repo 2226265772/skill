@@ -1,4 +1,6 @@
-package com.lq.skill.utils;
+package com.lq.skill.exception;
+
+import com.lq.skill.exception.ErrorCode;
 
 /**
  * @Auther: LQ

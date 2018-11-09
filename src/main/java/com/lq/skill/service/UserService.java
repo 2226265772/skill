@@ -3,7 +3,7 @@ package com.lq.skill.service;
 import com.lq.skill.dao.UserDao;
 import com.lq.skill.entity.User;
 import com.lq.skill.utils.EncyptUtils;
-import com.lq.skill.utils.ErrorCode;
+import com.lq.skill.exception.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

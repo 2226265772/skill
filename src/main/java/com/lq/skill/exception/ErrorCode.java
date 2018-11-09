@@ -1,4 +1,4 @@
-package com.lq.skill.utils;
+package com.lq.skill.exception;
 
 import lombok.Data;
 import org.apache.commons.lang3.ArrayUtils;
@@ -28,5 +28,13 @@ public class ErrorCode {
             }
         }
         throw new SkillException(errorCode.code,errorCode.msg);
+    }
+
+    @Override
+    public String toString() {
+        return "ErrorCode{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                '}';
     }
 }

@@ -14,7 +14,7 @@
 </head>
 <body>
 <div style="margin-left: 40%;margin-top: 150px">
-    <form class="sui-form form-horizontal">
+    <form class="sui-form form-horizontal" action="/test/doLogin" method="post" onsubmit=" return  login()">
         <div class="control-group">
             <label for="username" class="control-label">手机：</label>
             <div class="controls">
@@ -38,7 +38,7 @@
         <div class="control-group">
             <label class="control-label"></label>
             <div class="controls">
-                <button type="submit" class="sui-btn btn-primary" onclick="login()">Sign in</button>
+                <button type="submit" class="sui-btn btn-primary">Sign in</button>
             </div>
         </div>
     </form>
@@ -48,24 +48,22 @@
 <script>
     function login() {
         var passwd = $("#inputPassword").val()
-        //  前端数据加密
-        var salt = "liangbaikai"
-        passwd = salt.charAt(2) + passwd + salt
-        passwd = md5(passwd)
-        $.ajax({
-            url: "/test/doLogin",
-            type: "post",
-            data: {
-                username: $("#username").val(),
-                password: passwd
-            },
-            success: function (e) {
-                alert(e)
-            },
-            error: function (e) {
-                alert(e)
-            }
-        })
+        var username = $("#username").val()
+        var flag = true
+        if (!username || 0 === username.length) {
+            flag = false
+        }
+        if (!passwd || 0 === passwd.length) {
+            flag = false
+        }
+        if (flag) {
+            //盐
+            var salt = "liangbaikai"
+            //  前端数据加密
+            passwd1 = salt.charAt(2) + passwd + salt
+            $("#inputPassword").val(md5(passwd1))
+        }
+        return flag
     }
 </script>
 </html>
