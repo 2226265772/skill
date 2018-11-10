@@ -14,7 +14,7 @@ public class EncyptUtils {
     private static final String My_SALT = "liangbaikai";
 
    /* public static void main(String[] args) {
-//        32c5cedebded0147044d1edcaddadcfb
+        32c5cedebded0147044d1edcaddadcfb
         String s = md5("123456");
         System.out.println(s);
     }*/
@@ -22,6 +22,11 @@ public class EncyptUtils {
     public static String md5(String str) {
         return DigestUtils.md5Hex(My_SALT.charAt(2) + str + My_SALT);
     }
+
+    public static String commonMd5(String str) {
+        return DigestUtils.md5Hex(str);
+    }
+
 
     public static String UUID() {
         return UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();

@@ -14,6 +14,7 @@ public class ErrorCode {
     private String msg;
 
     public static final ErrorCode LOGIN_ERROR = new ErrorCode(10001, "账号或密码错误");
+    public static final ErrorCode LOGIN_EXPIRED_ERROR = new ErrorCode(10002, "登录过期 请重新登录");
 
     public ErrorCode(Integer code, String msg) {
         this.code = code;
@@ -27,7 +28,7 @@ public class ErrorCode {
                 message = message.replaceFirst("\\{" + i + "\\}", values[i].toString());
             }
         }
-        throw new SkillException(errorCode.code,errorCode.msg);
+        throw new SkillException(errorCode.code, errorCode.msg);
     }
 
     @Override

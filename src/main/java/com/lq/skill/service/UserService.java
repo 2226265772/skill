@@ -40,14 +40,14 @@ public class UserService {
 
     @Transactional
     public String tx() {
-//        User user = new User();
-//        user.setId(2L);
-//        user.setName("222");
-//        int insert = userDao.insert(user);
-//        User user1 = new User();
-//        user1.setId(1L);
-//        user1.setName("11");
-//        insert = userDao.insert(user1);
+/*        User user = new User();
+        user.setId(2L);
+        user.setName("222");
+        int insert = userDao.insert(user);
+        User user1 = new User();
+        user1.setId(1L);
+        user1.setName("11");
+        insert = userDao.insert(user1);*/
         return String.valueOf(1);
     }
 }

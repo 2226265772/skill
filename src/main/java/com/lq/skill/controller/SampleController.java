@@ -1,9 +1,11 @@
 package com.lq.skill.controller;
 
+import com.lq.skill.config.IgnoreCheck;
 import com.lq.skill.entity.User;
 import com.lq.skill.service.UserService;
 import com.lq.skill.utils.EncyptUtils;
 import com.lq.skill.exception.ErrorCode;
+import com.lq.skill.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -33,9 +35,9 @@ public class SampleController {
 
     //可提取到一个常数类
     //项目名字字母作为前缀key
-    private static final String SYSTEM_PREFIX = "SKILL";
+    public static final String SYSTEM_PREFIX = "SKILL";
     //cookie名
-    private static final String COOKIE_TOKEN = "token";
+    public static final String COOKIE_TOKEN = "token";
     //30分钟过期
     private static final int MAX_TIME = 3600;
     private static final long REDIS_AGE = 30;
@@ -59,8 +61,8 @@ public class SampleController {
     }
 
     @RequestMapping("/to_list")
-    public String list(Model model) {
-        model.addAttribute("name", "liangbaikai");
+    public String list(Model model, User user) {
+        model.addAttribute("user", user);
         return "index";
     }
 
@@ -70,8 +72,9 @@ public class SampleController {
      * @param user
      * @return
      */
+    @IgnoreCheck
     @PostMapping("/doLogin")
-    public String login(User user, HttpServletResponse response) {
+    public String login(User user, HttpServletResponse response) throws Exception {
         log.info(user + "");
         user = userService.login(user);
         if (user == null) {
@@ -80,7 +83,7 @@ public class SampleController {
         }
         //成功后生成 token  写入redis,设置过期时间30分钟 存储用户信息 并写回客户端
         String token = EncyptUtils.UUID();
-        stringRedisTemplate.opsForValue().set(SYSTEM_PREFIX + token, user.toString(), REDIS_AGE, TimeUnit.MINUTES);
+        stringRedisTemplate.opsForValue().set(SYSTEM_PREFIX + token, JsonUtils.obj2String(user), REDIS_AGE, TimeUnit.MINUTES);
         Cookie cookie = new Cookie(COOKIE_TOKEN, token);
         cookie.setPath("/");
         cookie.setMaxAge(MAX_TIME);
