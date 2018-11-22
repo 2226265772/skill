@@ -2,8 +2,6 @@ package com.lq.miaosha.controller;
 
 import com.lq.miaosha.domain.User;
 import com.lq.miaosha.redis.RedisService;
-import com.lq.miaosha.redis.UserKey;
-import com.lq.miaosha.result.CodeMsg;
 import com.lq.miaosha.result.Result;
 import com.lq.miaosha.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +10,50 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lq.miaosha.rabbitmq.MQSender;
+import com.lq.miaosha.redis.UserKey;
+import com.lq.miaosha.result.CodeMsg;
+
 @Controller
 @RequestMapping("/demo")
 public class SampleController {
 
 	@Autowired
-	UserService userService;
+    UserService userService;
 	
 	@Autowired
-	RedisService redisService;
+    RedisService redisService;
+
+	@Autowired
+	MQSender sender;
+	
+//	@RequestMapping("/mq/header")
+//    @ResponseBody
+//    public Result<String> header() {
+//		sender.sendHeader("hello,lq");
+//        return Result.success("Hello，world");
+//    }
+//	
+//	@RequestMapping("/mq/fanout")
+//    @ResponseBody
+//    public Result<String> fanout() {
+//		sender.sendFanout("hello,lq");
+//        return Result.success("Hello，world");
+//    }
+//	
+//	@RequestMapping("/mq/topic")
+//    @ResponseBody
+//    public Result<String> topic() {
+//		sender.sendTopic("hello,lq");
+//        return Result.success("Hello，world");
+//    }
+//	
+//	@RequestMapping("/mq")
+//    @ResponseBody
+//    public Result<String> mq() {
+//		sender.send("hello,lq");
+//        return Result.success("Hello，world");
+//    }
 	
     @RequestMapping("/hello")
     @ResponseBody

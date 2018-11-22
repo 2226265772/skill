@@ -1,10 +1,10 @@
 package com.lq.miaosha.vo;
 
-import com.lq.miaosha.domain.Goods;
-
 import java.util.Date;
 
-public class GoodsVo extends Goods{
+import com.lq.miaosha.domain.Goods;
+
+public class GoodsVo extends Goods {
 	private Double miaoshaPrice;
 	private Integer stockCount;
 	private Date startDate;

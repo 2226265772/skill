@@ -1,6 +1,9 @@
 package com.lq.miaosha.exception;
 
-import com.lq.miaosha.result.CodeMsg;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.lq.miaosha.result.Result;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
@@ -8,8 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import com.lq.miaosha.result.CodeMsg;
 
 @ControllerAdvice
 @ResponseBody

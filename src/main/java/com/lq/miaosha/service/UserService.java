@@ -1,10 +1,11 @@
 package com.lq.miaosha.service;
 
-import com.lq.miaosha.dao.UserDao;
-import com.lq.miaosha.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.lq.miaosha.dao.UserDao;
+import com.lq.miaosha.domain.User;
 
 @Service
 public class UserService {
